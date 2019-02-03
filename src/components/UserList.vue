@@ -1,15 +1,14 @@
 <template>
     <div>
-        <h1>Список сотрудников</h1>
         <table v-if="isVisible" class="table">
             <thead>
                 <tr>
-                    <th scope="col">Номер</th>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Фамилия</th>
-                    <th scope="col">Активность</th>
-                    <th scope="col">Аватар</th>
-                    <th scope="col">Редактирование</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Activity</th>
+                    <th scope="col">Аvatar</th>
+                    <th scope="col">Edite</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,28 +16,23 @@
                     <th scope="row">{{index }}</th>
                     <td>{{user.name | uppercase}}</td>
                     <td>{{user.lastName | uppercase}}</td>
-                    <td>{{active}}</td>
-                    <td v-if="user.avatar"  class="avatar">
+                    <td v-if="user.active">active</td>
+                    <td v-else>no active</td>
+                    <td class="avatar">
                         <img 
-                            :src= "user.avatar"    
+                            :src="user.avatar ? user.avatar : defaultAvatar"   
                             :alt= "user.alt">
-                    </td>
-                    <td v-else class="avatar">
-                        <img 
-                            :src= "defaultAvatar"    
-                            :alt= "user.alt">
-                    </td>
-                    <td>
+                    </td>                    
+                    <router-link tag="td" :to="'/user/' + user.id">
                         <a href="user.html" class="nav-link">
-                            Редактировать
-                        </a>
-                        
-                    </td>
+                            edite
+                        </a>                        
+                    </router-link>
                 </tr>            
             </tbody>
             <tfoot> 
                 <tr>                                
-                    <td colspan="4">Всего</td>
+                    <td colspan="4">Total</td>
                     <td>{{ count }}</td>
                 </tr> 
             </tfoot>
@@ -53,37 +47,47 @@ export default {
         return {
             users: [],
             defaultAvatar: "http://niiee.kg/wp-content/uploads/2017/05/avatar_male.png",
-            isVisible: true,
+            isVisible: true
         }
     },    
     created() {     
         this.users = [
             {
+                id: 1,
                 name: 'Иван_1',
                 lastName: 'Иванов_1',
+                active: true,
                 avatar: 'https://st2.depositphotos.com/8029582/11321/v/950/depositphotos_113218352-stock-illustration-satisfied-contented-seducer-and-happy.jpg',
                 alt: 'Иванов И.И.'
             },
             {
+                id: 2,
                 name: 'Иван_2',
                 lastName: 'Иванов_2',
+                active: true,
                 avatar: null
             },
             {
+                id: 3,
                 name: 'Иван_3',
                 lastName: 'Иванов_3',
+                active: true,
                 avatar: 'https://st2.depositphotos.com/8029582/11321/v/950/depositphotos_113218352-stock-illustration-satisfied-contented-seducer-and-happy.jpg',
                 alt: 'Иванов_3 И.И.'
             },
             {
+                id: 4,
                 name: 'Иван_4',
                 lastName: 'Иванов_4',
+                active: false,
                 avatar: 'https://st2.depositphotos.com/8029582/11321/v/950/depositphotos_113218352-stock-illustration-satisfied-contented-seducer-and-happy.jpg',
                 alt: 'Иванов_4 И.И.'
             },
             {
+                id: 5,
                 name: 'Иван_5',
                 lastName: 'Иванов_5',
+                active: true,
                 avatar: null,
                 alt: 'Иванов_5 И.И.'
             },
@@ -101,4 +105,22 @@ export default {
             }
 }
 </script>
+<style scoped>        
+        .table {
+            width: 80%;
+            margin:  0px auto;
+        }
+        h1 {
+            text-align: center;
+            color: #888;
+        }
+        img {
+            width: 30px;
+            height: 30px;
+        }   
+        a {
+            text-decoration: none;
+        }
+        
+    </style>
 
