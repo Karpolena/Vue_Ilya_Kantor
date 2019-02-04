@@ -1,6 +1,7 @@
-<template>
+<template>   
     <div>
-        <table v-if="isVisible" class="table">
+        <h5>userList</h5>
+        <table  class="table">
             <thead>
                 <tr>
                     <th scope="col">Number</th>
@@ -14,17 +15,17 @@
             <tbody>
                 <tr v-for="(user, index) in users" :key="index">
                     <th scope="row">{{index }}</th>
-                    <td>{{user.name | uppercase}}</td>
-                    <td>{{user.lastName | uppercase}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.surname}}</td>
                     <td v-if="user.active">active</td>
                     <td v-else>no active</td>
                     <td class="avatar">
                         <img 
                             :src="user.avatar ? user.avatar : defaultAvatar"   
-                            :alt= "user.alt">
+                            :alt= " user.name + user.surname">
                     </td>                    
                     <router-link tag="td" :to="'/user/' + user.id">
-                        <a href="user.html" class="nav-link">
+                        <a  class="nav-link">
                             edite
                         </a>                        
                     </router-link>
@@ -33,11 +34,10 @@
             <tfoot> 
                 <tr>                                
                     <td colspan="4">Total</td>
-                    <td>{{ count }}</td>
+                    <td>{{ total }}</td>
                 </tr> 
             </tfoot>
         </table>
-        <button v-on:click="isVisible = !isVisible" type="button" class="btn btn-secondary">Show</button>
     </div>
 </template>
 
@@ -45,64 +45,20 @@
 export default {
     data() {
         return {
-            users: [],
-            defaultAvatar: "http://niiee.kg/wp-content/uploads/2017/05/avatar_male.png",
-            isVisible: true
+            defaultAvatar: "http://niiee.kg/wp-content/uploads/2017/05/avatar_male.png"
         }
-    },    
-    created() {     
-        this.users = [
-            {
-                id: 1,
-                name: 'Иван_1',
-                lastName: 'Иванов_1',
-                active: true,
-                avatar: 'https://st2.depositphotos.com/8029582/11321/v/950/depositphotos_113218352-stock-illustration-satisfied-contented-seducer-and-happy.jpg',
-                alt: 'Иванов И.И.'
-            },
-            {
-                id: 2,
-                name: 'Иван_2',
-                lastName: 'Иванов_2',
-                active: true,
-                avatar: null
-            },
-            {
-                id: 3,
-                name: 'Иван_3',
-                lastName: 'Иванов_3',
-                active: true,
-                avatar: 'https://st2.depositphotos.com/8029582/11321/v/950/depositphotos_113218352-stock-illustration-satisfied-contented-seducer-and-happy.jpg',
-                alt: 'Иванов_3 И.И.'
-            },
-            {
-                id: 4,
-                name: 'Иван_4',
-                lastName: 'Иванов_4',
-                active: false,
-                avatar: 'https://st2.depositphotos.com/8029582/11321/v/950/depositphotos_113218352-stock-illustration-satisfied-contented-seducer-and-happy.jpg',
-                alt: 'Иванов_4 И.И.'
-            },
-            {
-                id: 5,
-                name: 'Иван_5',
-                lastName: 'Иванов_5',
-                active: true,
-                avatar: null,
-                alt: 'Иванов_5 И.И.'
-            },
-        ]
+    }, 
+    props: {
+        users: {
+            type: Array,
+            required: true
+        }
     },
     computed: {
-                count() {
-                    return this.users.length
-                }
-            },
-            filters: {
-                uppercase(value) {
-                    return value.toUpperCase()
-                }
-            }
+        total() {
+            return this.users.length
+        }
+    }
 }
 </script>
 <style scoped>        
@@ -110,7 +66,7 @@ export default {
             width: 80%;
             margin:  0px auto;
         }
-        h1 {
+        h5 {
             text-align: center;
             color: #888;
         }

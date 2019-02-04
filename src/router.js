@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home.vue'
 import Users from '@/views/Users.vue'
 import User from '@/views/User.vue'
+import UserForm from '@/components/UserForm.vue'
 import NotFound from '@/views/NotFound.vue'
 
 Vue.use(Router)
@@ -24,10 +25,16 @@ export default new Router({
       // component: () => import( './views/Users.vue')
     },
     {
-      path: '/user/:id',
+      path: '/user',
       name: 'user', 
       component: User     
       // component: () => import( './views/User.vue')
+    },
+    {
+      path: '/user/:id',
+      name: 'userForm', 
+      component: UserForm     
+      // component: () => import( './views/UserForm.vue')
     },
     {
       path: '*',

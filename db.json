@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "name": "dh",
+      "surname": "dh",
+      "avatar": "",
+      "id": 1
+    },
+    {
+      "name": "sdf",
+      "surname": "sdf",
+      "avatar": "",
+      "id": 2
+    },
+    {
+      "name": "ert",
+      "surname": "ert",
+      "avatar": "",
+      "id": 3
+    },
+    {
+      "name": "sg",
+      "surname": "dfg",
+      "avatar": "",
+      "id": 4
+    },
+    {
+      "name": "gr",
+      "surname": "dfg",
+      "avatar": "",
+      "id": 5
+    }
+  ]
+}
